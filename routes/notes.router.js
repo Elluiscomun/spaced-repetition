@@ -27,7 +27,7 @@ router.get('/read', async (req, res, next) =>{
       notes
     });
   }catch(err){
-    console.error(err)
+
     next(boom.badRequest());
   }
 });

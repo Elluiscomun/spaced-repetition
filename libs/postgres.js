@@ -16,11 +16,11 @@ async function getConnection(){
 
 async function getConnection(){
   const client = new Client({
-    host: 'dpg-crc5qdbqf0us73dim530-a.virginia-postgres.render.com',
-    port: 5432,
-    user: 'lucho',
-    password: 'wy5REDFscs0F7XLepy1V3MfaO05wYJJE',
-    database: 'my_task_p13y',
+    host: process.env.HOST_DB,
+    port: process.env.PORT_DB,
+    user: process.env.PORT,
+    password: process.env.PASS_DB,
+    database: process.env.NAME_DB,
     ssl: {
       rejectUnauthorized: false
     }
