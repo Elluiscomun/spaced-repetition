@@ -14,6 +14,7 @@ router.post('/register', async (req, res, next) =>{
       body
     });
   }catch(err){
+    console.error(err);
     next(boom.badRequest());
   }
 })

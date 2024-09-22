@@ -15,6 +15,7 @@ router.post('/create', async (req, res, next) =>{
       body
     });
   }catch(err){
+    console.error(err)
     next(boom.badRequest());
   }
 });
@@ -27,7 +28,7 @@ router.get('/read', async (req, res, next) =>{
       notes
     });
   }catch(err){
-
+    console.error(err)
     next(boom.badRequest());
   }
 });
@@ -40,6 +41,7 @@ router.put('/reviewNote', async (req, res, next) =>{
       'message': 'Note updated'
     });
   }catch(err){
+    console.error(err)
     next(boom.badRequest());
   }
 });
