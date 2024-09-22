@@ -12,6 +12,7 @@ async function getConnection(){
     }
   });
 
+
   await client.connect();
 
   return client;

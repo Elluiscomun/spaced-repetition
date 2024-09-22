@@ -68,8 +68,10 @@ class  Notes{
   async createNote(nametag_user, message){
     const client = await getConnection();
     const rta =
-      await client.query ('INSERT INTO public."NOTE" (nametag_user, message_note)'
-        + `VALUES ('${nametag_user}','${message}')`);
+      await client.query (
+        'INSERT INTO public."NOTE" (nametag_user, message_note) VALUES ($1, $2)',
+        [nametag_user, message]
+      );
     return rta.command;
   }
 
