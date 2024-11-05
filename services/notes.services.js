@@ -29,11 +29,13 @@ class  Notes{
 
   async getNotesAfterWeek(nametag){
     let currentDate  = new Date();
+    currentDate.setDate(currentDate.getDate()-7);
+
     const client = await getConnection();
     const rta = await client.query('SELECT message_note, create_date_user FROM public."NOTE" '
       + `WHERE nametag_user = '${nametag}' `
       +  'AND review_date IS NULL '
-      +  `AND EXTRACT(DAY FROM create_date_user) = ${currentDate.getDate()-7} `
+      +  `AND EXTRACT(DAY FROM create_date_user) = ${currentDate.getDate()} `
       +  `AND EXTRACT(MONTH FROM create_date_user) = ${currentDate.getMonth()+1} `
       +  `AND EXTRACT(YEAR FROM create_date_user) = ${currentDate.getFullYear()}`)
 
