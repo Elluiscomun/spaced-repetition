@@ -8,7 +8,7 @@ const service =new note_service();
 router.post('/create', async (req, res, next) =>{
   try{
     const body = req.body;
-    await service.createNote(body.nametag, body.message);
+    await service.createNote(body.nametag, body.message, body.timeZone);
 
     res.json({
       'message' : 'Note created',
