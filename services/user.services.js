@@ -6,10 +6,14 @@ class User{
 
   async register(nametag){
     const client = await getConnection();
-    const rta = await client.query('INSERT INTO public."USER"('
-      + 'rol_user, nametag_user, password_user, email_user) '
-      + `VALUES ('user', '${nametag}', '${nametag}', '${nametag}');`);
-    return rta;
+    try{
+      const rta = await client.query('INSERT INTO public."USER"('
+        + 'rol_user, nametag_user, password_user, email_user) '
+        + `VALUES ('user', '${nametag}', '${nametag}', '${nametag}');`);
+      return rta;
+    }finally{
+      client.release();
+    }
   }
 }
 
