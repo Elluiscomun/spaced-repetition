@@ -6,17 +6,19 @@ class  Notes{
   constructor(){}
 
 
-  async getNotes(nametag){
+  async getNotes(nametag, date_user){
+    const day = new Date(date_user)
+
     let notes = [];
-    notes.push(... await this.getNotesAfterDay(nametag));
-    notes.push(... await this.getNotesAfterWeek(nametag));
-    notes.push(... await this.getNotesAfterMonth(nametag));
-    notes.push(... await this.getNotesAfterYear(nametag));
+    notes.push(... await this.getNotesAfterDay(nametag, day));
+    notes.push(... await this.getNotesAfterWeek(nametag, day));
+    notes.push(... await this.getNotesAfterMonth(nametag, day));
+    notes.push(... await this.getNotesAfterYear(nametag, day));
     return notes;
   }
 
-  async getNotesAfterDay(nametag){
-    let currentDate  = new Date();
+  async getNotesAfterDay(nametag, day){
+    let currentDate  = day;
     const client = await getConnection();
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
@@ -32,8 +34,8 @@ class  Notes{
     }
   }
 
-  async getNotesAfterWeek(nametag){
-    let currentDate  = new Date();
+  async getNotesAfterWeek(nametag, day){
+    let currentDate  = day;
     currentDate.setDate(currentDate.getDate()-7);
 
     const client = await getConnection();
@@ -51,8 +53,8 @@ class  Notes{
     }
   }
 
-  async getNotesAfterMonth(nametag){
-    let currentDate  = new Date();
+  async getNotesAfterMonth(nametag, day){
+    let currentDate  = day;
     const client = await getConnection();
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
@@ -68,8 +70,8 @@ class  Notes{
     }
   }
 
-  async getNotesAfterYear(nametag){
-    let currentDate  = new Date();
+  async getNotesAfterYear(nametag, day){
+    let currentDate  = day;
     const client = await getConnection();
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '

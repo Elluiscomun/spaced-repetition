@@ -1,7 +1,7 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
 async function getConnection(){
-  const client = new Client({
+  const pool = new Pool({
     host: process.env.HOST_DB,
     port: process.env.PORT_DB,
     user: process.env.USER_DB,
@@ -13,7 +13,8 @@ async function getConnection(){
   });
 
 
-  await client.connect();
+  //await client.connect();
+  const client = await pool.connect();
 
   return client;
 }

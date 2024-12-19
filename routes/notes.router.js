@@ -22,8 +22,8 @@ router.post('/create', async (req, res, next) =>{
 
 router.get('/read', async (req, res, next) =>{
   try{
-    const {nametag} = req.headers;
-    const notes = await service.getNotes(nametag);
+    const {date_user, nametag} = req.headers;
+    const notes = await service.getNotes(nametag, date_user);
     res.json({
       notes
     });
