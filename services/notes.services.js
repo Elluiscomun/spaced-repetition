@@ -23,7 +23,6 @@ class  Notes{
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
-        +  'AND review_date IS NOT NULL '
         +  `AND TO_CHAR(review_date, 'YYYY-MM-DD') != '${currentDate}' `
         +  `AND EXTRACT(DAY FROM create_date_user) = ${day.getDate()-1} `
         +  `AND EXTRACT(MONTH FROM create_date_user) = ${day.getMonth()+1} `
