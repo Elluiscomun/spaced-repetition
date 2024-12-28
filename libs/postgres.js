@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 async function getConnection(){
   const pool = new Pool({
-    host: process.env.HOST_DBB,
+    host: process.env.HOST_DB,
     port: process.env.PORT_DB,
     user: process.env.USER_DB,
     password: process.env.PASS_DB,
