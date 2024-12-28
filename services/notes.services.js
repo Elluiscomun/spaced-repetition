@@ -20,7 +20,7 @@ class  Notes{
   async getNotesBeforeDay(nametag, day){
     let currentDate  = day.toISOString().split("T")[0];
     const client = await getConnection();
-
+    console.log(day, currentDate, day.getUTCDate()-1)
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
