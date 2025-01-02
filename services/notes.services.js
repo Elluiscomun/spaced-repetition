@@ -24,7 +24,6 @@ class  Notes{
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
-        +  `AND (review_date IS NULL OR TO_CHAR(review_date, 'YYYY-MM-DD') != '${currentDate}') `
         +  `AND EXTRACT(DAY FROM create_date_user) = ${day.getUTCDate()-1} `
         +  `AND EXTRACT(MONTH FROM create_date_user) = ${day.getMonth()+1} `
         +  `AND EXTRACT(YEAR FROM create_date_user) = ${day.getFullYear()}`)
@@ -43,7 +42,6 @@ class  Notes{
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
-        +  `AND (review_date IS NULL OR TO_CHAR(review_date, 'YYYY-MM-DD') !='${day.toISOString().split("T")[0]}') `
         +  `AND EXTRACT(DAY FROM create_date_user) = ${currentDate.getUTCDate()} `
         +  `AND EXTRACT(MONTH FROM create_date_user) = ${currentDate.getMonth()+1} `
         +  `AND EXTRACT(YEAR FROM create_date_user) = ${currentDate.getFullYear()}`)
@@ -55,12 +53,11 @@ class  Notes{
   }
 
   async getNotesAfterMonth(nametag, day){
-    let currentDate  = day.toISOString().split("T")[0];
+    //let currentDate  = day.toISOString().split("T")[0];
     const client = await getConnection();
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
-        +  `AND (review_date IS NULL OR TO_CHAR(review_date, 'YYYY-MM-DD') != '${currentDate}') `
         +  `AND EXTRACT(DAY FROM create_date_user) = ${day.getUTCDate()} `
         +  `AND EXTRACT(MONTH FROM create_date_user) = ${day.getMonth()} `
         +  `AND EXTRACT(YEAR FROM create_date_user) = ${day.getFullYear()}`)
@@ -72,12 +69,11 @@ class  Notes{
   }
 
   async getNotesAfterYear(nametag, day){
-    let currentDate  = day.toISOString().split("T")[0];
+    //let currentDate  = day.toISOString().split("T")[0];
     const client = await getConnection();
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
-        +  `AND (review_date IS NULL OR TO_CHAR(review_date, 'YYYY-MM-DD') != '${currentDate}') `
         +  `AND EXTRACT(DAY FROM create_date_user) = ${day.getUTCDate()} `
         +  `AND EXTRACT(MONTH FROM create_date_user) = ${day.getMonth()+1} `
         +  `AND EXTRACT(YEAR FROM create_date_user) = ${day.getFullYear()-1}`);
