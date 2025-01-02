@@ -19,12 +19,14 @@ class  Notes{
 
   async getNotesBeforeDay(nametag, day){
     let currentDate  = day.toISOString().split("T")[0];
+    currentDate.setDate(currentDate.getDate()-1);
+
     const client = await getConnection();
-    console.log(day, currentDate, day.getDate()-1)
+
     try{
       const rta = await client.query('SELECT message_note, create_date_user, id_note FROM public."NOTE" '
         + `WHERE nametag_user = '${nametag}' `
-        +  `AND EXTRACT(DAY FROM create_date_user) = ${day.getDate()-1} `
+        +  `AND EXTRACT(DAY FROM create_date_user) = ${day.getDate()} `
         +  `AND EXTRACT(MONTH FROM create_date_user) = ${day.getMonth()+1} `
         +  `AND EXTRACT(YEAR FROM create_date_user) = ${day.getFullYear()}`)
 
